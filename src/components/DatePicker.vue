@@ -49,7 +49,9 @@
           )
         .datepicker__months(v-if='screenSize == "desktop"')
           div.datepicker__month(v-for='n in [0,1]'  v-bind:key='n')
-            h1.datepicker__month-name(v-text='getMonth(months[activeMonthIndex+n].days[15].date)')
+            <h1 class="datepicker__month-name" v-text='getMonth(months[activeMonthIndex+n].days[15].date)'>
+            </h1>
+            <span class="datepicker__year-label" v-text='getYear(months[activeMonthIndex+n].days[15].date)'>current year</span>
             .datepicker__week-row.-hide-up-to-tablet
               .datepicker__week-name(v-for='dayName in i18n["day-names"]' v-text='dayName')
             .square(v-for='day in months[activeMonthIndex+n].days'
@@ -372,6 +374,8 @@ export default {
     getDay(date) { return fecha.format(date, 'D') },
 
     getMonth(date) { return this.i18n["month-names"][fecha.format(date, 'M') - 1] },
+
+    getYear(date) { return fecha.format(date, 'YYYY') },
 
     formatDate(date) { return fecha.format(date, this.format) },
 
